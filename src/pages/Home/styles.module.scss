@@ -1,0 +1,140 @@
+.homeContainer {
+    display: grid;
+    grid-template-columns: 20rem 3fr;
+
+
+    &__main {
+        padding: 1rem;
+
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .section {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            h3 {
+                margin: .5rem 0 2rem;
+                font-weight: 400;
+            }
+
+            .schedule {
+                background-color: var(--color-primary);
+                padding: 1rem;
+                border-radius: 5px;
+                margin-top: 1rem;
+
+                &__header ul {
+                    display: flex;
+                    gap: 1rem;
+                }    
+            }
+
+            .calendar {
+                position: absolute;
+                z-index: 5;
+            }
+        }
+
+        .form  {
+            display: flex;
+            gap: 1rem;
+            
+            .input {
+                width: 150px;
+                padding: .5rem;
+                border-radius: 5px 0 0 5px ;
+                background-color: #F2F2F2;
+                border: 0;
+                color: #6b6b6b;
+                font-weight: 500;
+                
+                & + input {
+                    border-radius: 0 5px 5px 0;
+                    margin-left: .2rem;
+                }
+
+                &:focus {
+                    outline-color: #808080;
+                }
+            }
+
+            button {
+                color: #6b6b6b;
+                border-radius: 5px;
+                border: 0;
+                padding: 0 1rem ;
+            }
+
+            .btnAgendar {
+                display: flex;
+                align-items: center;
+                background-color: var(--color-primary);
+                color: var(--color-white);
+
+                span {
+                    display: inline-block;
+                    height: 60%;
+                    width: 1px;
+                    background-color: var(--color-white);
+                    margin: .5rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 950px) {
+    .homeContainer .homeContainer__main .section .form {
+        flex-direction: column;
+
+        button {
+            padding-top: 1rem ;
+            padding-bottom: 1rem ;
+        }
+
+        > div {
+            display: flex;
+        }
+        .input {
+            padding: 1rem;
+            width: 100%;
+        }
+    }
+}
+
+@media (min-width: 730px) {
+    .homeContainer{
+    min-height: 100vh;
+
+    }
+}
+
+@media (max-width: 730px) {
+    .homeContainer {
+        grid-template-columns: 1fr;
+
+        &__main {
+            margin-top: 5rem;
+            .section .form {
+                .btnAgendar {
+                    justify-content: center;
+                    font-weight: 600;
+
+                    .iconCalendar, span {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+    .logo {
+        display: none;
+    }
+}

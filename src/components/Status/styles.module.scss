@@ -1,0 +1,48 @@
+.statusFuture, .statusNext, .statusStarted {
+    width: 14px;
+    height: 14px;
+    border-radius: 100%;
+    position: relative;
+    cursor: pointer;
+
+    span {
+        z-index: 2;
+        display: none;
+        position: absolute;
+        padding: .7rem 1rem;
+        background-color: #2C3033;
+        color: var(--color-white);
+        white-space: nowrap;
+        left: 50%;
+        transform: translateX(-50%);
+        
+    }
+
+    &:hover span{
+        display: block;
+        animation: animaUp .2s forwards;
+    }
+}
+
+.statusNext {
+    background-color: #ECC561;
+    border: 1px solid #ECC561;
+}
+
+.statusFuture {
+    background-color: #02E2BD;
+    border: 1px solid #61F4D7;
+}
+
+.statusStarted {
+    background-color: #EB5F5F;
+    border: 1px solid #FD7E7E;
+}
+
+@keyframes animaUp {
+    from {
+        top: -1rem;
+    } to {
+        top: -3rem;
+    }
+}
