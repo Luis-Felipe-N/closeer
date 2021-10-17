@@ -53,7 +53,7 @@ export function Form({schedules}: SchedulesProps) {
             // valor >= date e valor <= dateEnd = job na mesma hora.
             // valor <= date e valor >= dateEnd = job na mesma hora.
             if (thereWorkThatDay) {
-                setError('Há um conflito de datas-horas 0')
+                setError('Há um conflito de datas-horas')
                 return false
             }
 
