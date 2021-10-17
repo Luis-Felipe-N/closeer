@@ -52,9 +52,15 @@ export function Form(props: SchedulesProps) {
             setError('Termino da agenda está errada')
             return
         }
-        const ThereWorkThatDay = props.schedules?.some( ({key, schedule}: SchedulesType) => dateInMilliseconds >= schedule.date && dateInMilliseconds <= schedule.date_end )
-        // date == 10, dateEnd == 15 | verificar se tem um valor nesse intervalo 
-        // valor >= date e valor <= dateEnd = job na mesma data.
+        const thereWorkThatDay = props.schedules?.some( ({key, schedule}: SchedulesType) => (dateInMilliseconds >= schedule.date && dateEnIndMilliseconds <= schedule.date_end) || (dateInMilliseconds <= schedule.date && dateEnIndMilliseconds >= schedule.date_end) )
+        // valor >= date e valor <= dateEnd = job na mesma hora.
+        // valor <= date e valor >= dateEnd = job na mesma hora.
+        if (thereWorkThatDay) return setError('Há um conflito de datas-horas')
+        
+        const sameWorkDay = props.schedules?.some( ({key, schedule}: SchedulesType) => dateInMilliseconds === schedule.date || dateInMilliseconds === schedule.date_end )
+
+        if( sameWorkDay ) return setError('Há um conflito de datas-horas')
+
         return { dateInMilliseconds, dateEnIndMilliseconds }
     }
 
