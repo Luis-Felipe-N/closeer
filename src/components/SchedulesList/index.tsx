@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Schedules } from '../Schedule'
 import { Status }  from '../Status'
 import styles from './styles.module.scss'
