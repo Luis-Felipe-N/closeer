@@ -20,14 +20,12 @@ export function ScheduleList({schedules}: SchedulesProps) {
     const [ orderedSchedule , setOrderedSchedule ] = useState<SchedulesType[]>()
 
     useEffect(() => {
-        console.log(schedules)
         if (schedules) {
             schedules.sort((a, b) => {
                 return a.schedule.date - b.schedule.date
             })
             setOrderedSchedule(schedules)
         }
-        console.log(schedules)
     }, [schedules])
 
     return (

@@ -24,14 +24,7 @@ export function Home() {
 
     useEffect(() => {
         getSchedules(setSchedules)
-        console.log(schedules)
     }, [])
-
-    useEffect(() => {
-        console.log(schedules)
-    }, [schedules])
-
-
 
     return (
         <div className={styles.homeContainer}>

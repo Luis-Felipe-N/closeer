@@ -4,8 +4,9 @@
     border-radius: 100%;
     position: relative;
     cursor: pointer;
-
+    
     span {
+        border-radius: 5px;
         z-index: 2;
         display: none;
         position: absolute;
@@ -15,7 +16,20 @@
         white-space: nowrap;
         left: 50%;
         transform: translateX(-50%);
-        
+
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translate(-50%);
+            height: 0;
+            width: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #2C3033;
+        }
     }
 
     &:hover span{
@@ -42,7 +56,9 @@
 @keyframes animaUp {
     from {
         top: -1rem;
+        opacity: 0;
     } to {
-        top: -3rem;
+        top: -3.5rem;
+        opacity: 1;
     }
 }

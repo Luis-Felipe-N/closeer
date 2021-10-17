@@ -1,8 +1,16 @@
+.calendarContainer {
+    position: absolute;
+    z-index: 2;
+    display: grid;
+}
+
 .formContainer {
+
     .form  {
         .timeStart {
             display: flex;
             gap: 1rem;
+            width: 100%;
         }
         .timeEnd {
             margin-top: 1rem;
@@ -31,6 +39,7 @@
         }
 
         button {
+            width: 50%;
             color: #6b6b6b;
             border-radius: 5px;
             border: 0;

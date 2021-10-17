@@ -7,8 +7,10 @@ import { useClickOutSide } from '../../hooks/useClickOutSide';
 import { addSchedule } from '../../utils/firebase';
 import { ReactComponent as CalendarIcon } from '../../assets/image/calendar.svg'
 
-import styles from './styles.module.scss'
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
+import styles from './styles.module.scss'
 interface SchedulesType {
     key: string,
     schedule: {
@@ -28,6 +30,7 @@ export function Form({schedules}: SchedulesProps) {
     const [ inputHoursEnd, setInputHoursEnd ] = useState('')
     const [ inputMinutesEnd, setInputMinutesEnd ] = useState('')
     const [ error, setError ] = useState('')
+    const [ dateBtn, setDateBtn ] = useState(false)
 
     const [ date, setDate ] = useState(new Date());
     const [ openCalendar, setOpenCalendar ] = useState(false)
@@ -35,6 +38,35 @@ export function Form({schedules}: SchedulesProps) {
     const calendarRef = useRef<HTMLDivElement>(null)
 
     const { clickOutSide } = useClickOutSide()
+
+    const validateDate = (dateInMilliseconds: number, dateEndIndMilliseconds: number) => {
+        const timeEndIsCorrect = dateEndIndMilliseconds <=  dateInMilliseconds
+        if ( timeEndIsCorrect ) {
+            setError('Termino da agenda está errada')
+            return false
+        }
+       
+        const sameDate = schedules?.some( ({key, schedule}: SchedulesType) => date.getDate() === new Date(schedule.date).getDate())
+
+        if ( sameDate ) {
+            const thereWorkThatDay = schedules?.some( ({key, schedule}: SchedulesType) => (dateInMilliseconds >= schedule.date && dateEndIndMilliseconds <= schedule.date_end) || (dateInMilliseconds <= schedule.date && dateEndIndMilliseconds >= schedule.date_end) )
+            // valor >= date e valor <= dateEnd = job na mesma hora.
+            // valor <= date e valor >= dateEnd = job na mesma hora.
+            if (thereWorkThatDay) {
+                setError('Há um conflito de datas-horas 0')
+                return false
+            }
+
+            const sameHoursBetweenJobs = schedules?.some( ({key, schedule}: SchedulesType) => (dateInMilliseconds <= schedule.date && dateEndIndMilliseconds >= schedule.date) || (dateInMilliseconds <= schedule.date_end && dateEndIndMilliseconds >= schedule.date_end) )
+            if(sameHoursBetweenJobs) {
+                setError('Há um conflito de datas-horas')
+                return false
+            }
+        }
+
+        return true
+
+    }
 
     const getDatesFormated = () => {
         date.setHours(Number(inputHours))
@@ -47,24 +79,8 @@ export function Form({schedules}: SchedulesProps) {
         const dateInMilliseconds = Date.parse(String(date))
         const dateEndIndMilliseconds = Date.parse(String(dateEnd))
 
-        const timeEndIsCorrect = dateEndIndMilliseconds <=  dateInMilliseconds
-        if ( timeEndIsCorrect ) {
-            setError('Termino da agenda está errada')
-            return
-        }
-       
-        const sameDate = schedules?.some( ({key, schedule}: SchedulesType) => date.getDate() === new Date(schedule.date).getDate())
-
-        if ( sameDate ) {
-            const thereWorkThatDay = schedules?.some( ({key, schedule}: SchedulesType) => (dateInMilliseconds >= schedule.date && dateEndIndMilliseconds <= schedule.date_end) || (dateInMilliseconds <= schedule.date && dateEndIndMilliseconds >= schedule.date_end) )
-            // valor >= date e valor <= dateEnd = job na mesma hora.
-            // valor <= date e valor >= dateEnd = job na mesma hora.
-            if (thereWorkThatDay) return setError('Há um conflito de datas-horas 0')
-
-            const sameHoursBetweenJobs = schedules?.some( ({key, schedule}: SchedulesType) => (dateInMilliseconds <= schedule.date && dateEndIndMilliseconds >= schedule.date) || (dateInMilliseconds <= schedule.date_end && dateEndIndMilliseconds >= schedule.date_end) )
-            if(sameHoursBetweenJobs) return setError('Há um conflito de datas-horas')
-        }
-
+        validateDate(dateInMilliseconds, dateEndIndMilliseconds)
+        if(!validateDate(dateInMilliseconds, dateEndIndMilliseconds)) return
         return { dateInMilliseconds, dateEndIndMilliseconds }
     }
 
@@ -78,14 +94,14 @@ export function Form({schedules}: SchedulesProps) {
     const handleAddSchedule = async (e: any) => {
         e.preventDefault()
 
-        if (!inputHours || !inputMinutes && !inputHoursEnd || !inputMinutesEnd ) {
+        if (!inputHours || !inputMinutes || !inputHoursEnd || !inputMinutesEnd ) {
             setError('Preencha todos os campos')
             return
         }
 
-        if (error) return
+        if (error) return 
 
-       const dates = getDatesFormated()
+        const dates = getDatesFormated()
 
         if (!dates?.dateEndIndMilliseconds) return
 
@@ -101,12 +117,12 @@ export function Form({schedules}: SchedulesProps) {
         if(openCalendar) {
             clickOutSide({calendarRef, openCalendar, setOpenCalendar})
         }
-    }, [openCalendar])
-
+    }, [openCalendar, clickOutSide])
     return (
+        <>
         <section className={styles.formContainer}>
             { openCalendar && (
-                <div ref={calendarRef} className={styles.calendar}>
+                <div onClick={() => setDateBtn(true)} ref={calendarRef} className={styles.calendarContainer}>
                     <Calendar 
                         onChange={setDate}
                         value={date}
@@ -118,7 +134,11 @@ export function Form({schedules}: SchedulesProps) {
             )}
             <form className={styles.form} onSubmit={handleAddSchedule}>
                 <div  className={styles.timeStart}>
-                    <button onClick={() => setOpenCalendar(true)} type="button">Selecine uma data...</button>
+                    { dateBtn ? (
+                        <button onClick={() => setOpenCalendar(!openCalendar)} type="button">{format(date, "d'/'MMMM", {locale: ptBR})}</button>
+                    ) : (
+                        <button onClick={() => setOpenCalendar(!openCalendar)} type="button">Selecione uma data...</button>
+                    )}
                     <div>
                         <Input 
                             className={styles.input}
@@ -163,5 +183,6 @@ export function Form({schedules}: SchedulesProps) {
             </form>
             { error && <p className="error">{error}</p>}
     </section>
+    </>
     )
 }

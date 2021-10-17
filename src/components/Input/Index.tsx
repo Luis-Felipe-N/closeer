@@ -1,5 +1,3 @@
-import styles from './styles.module.scss'
-
 interface InputProps {
     type: string,
     value: string,

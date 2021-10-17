@@ -4,7 +4,6 @@ import { db } from '../services/firebase'
 import { ref, set, getDatabase, onValue } from "@firebase/database";
 
 export const addSchedule = async ( date: Number, dateEnd: Number ) => {
-    console.log('adicionado agendamento')
     try {
         set(ref(db, 'users/' + 1 + '/schedule/' + uuidV4() ), {
             date: date,

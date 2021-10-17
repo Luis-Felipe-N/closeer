@@ -1,10 +1,12 @@
 {
-    "fisrt_name": "Yuji",
-    "last_name": "itadori",
-    "picture": "https://nacao42.com.br/wp-content/uploads/2020/12/yuji-Itadori.jpg",
-    "height": "173",
-    "size": "M",
-    "shoe": "37",
-    "role": "Exorcista Jujutsu",
-    "created_at": "2019-10-26T14:40:13.365Z"
+    "data": {
+        "fisrt_name": "Yuji",
+        "last_name": "itadori",
+        "picture": "https://nacao42.com.br/wp-content/uploads/2020/12/yuji-Itadori.jpg",
+        "height": 173,
+        "size": "M",
+        "shoe": 37,
+        "role": "Exorcista Jujutsu",
+        "created_at": "2019-10-26T14:40:13.365Z"
+    }
 }

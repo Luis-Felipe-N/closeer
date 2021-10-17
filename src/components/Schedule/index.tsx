@@ -31,7 +31,7 @@ export function Schedules({schedule}: ShedulesType) {
         } else {
             setStatus('future')
         }
-    }, [])  
+    }, [schedule])  
 
     return (
         <li className={styles.scheduleContainer}>
