@@ -9,10 +9,12 @@ export function useClickOutSide() {
         document.addEventListener('click', handleClickOutSide)
 
         function handleClickOutSide( event: any ) {
-            if (!calendarRef?.current.contains(event.target)) {
-                setOpenCalendar(!openCalendar)
-                document.removeEventListener('click', handleClickOutSide)
+            if(calendarRef?.current) {
+                if (!calendarRef?.current.contains(event.target)) {
+                    setOpenCalendar(!openCalendar)
+                }
             }
+            document.removeEventListener('click', handleClickOutSide)
         }
     }
 

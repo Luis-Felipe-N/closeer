@@ -19,17 +19,17 @@ interface SchedulesProps {
 export function ScheduleList({schedules}: SchedulesProps) {
     const [ orderedSchedule , setOrderedSchedule ] = useState<SchedulesType[]>()
 
-    const filterByYear = useCallback(() => {
-        const scheduleFilter = orderedSchedule?.filter( ({ key, schedule }: SchedulesType ) => {
-            const year = new Date(schedule.date).getFullYear()
-            const currentYear = new Date().getFullYear()
-            if( year === currentYear) {
-                return true
-            } else return false
-        } )
+    // const filterByYear = useCallback(() => {
+    //     const scheduleFilter = orderedSchedule?.filter( ({ key, schedule }: SchedulesType ) => {
+    //         const year = new Date(schedule.date).getFullYear()
+    //         const currentYear = new Date().getFullYear()
+    //         if( year === currentYear) {
+    //             return true
+    //         } else return false
+    //     } )
 
-        setOrderedSchedule(scheduleFilter)
-    }, [orderedSchedule])
+    //     setOrderedSchedule(scheduleFilter)
+    // }, [orderedSchedule])
 
     useEffect(() => {
         if (schedules) {
@@ -37,9 +37,9 @@ export function ScheduleList({schedules}: SchedulesProps) {
                 return a.schedule.date - b.schedule.date
             })
             setOrderedSchedule(schedules)
-            filterByYear()
+           
         }
-    }, [schedules, filterByYear])
+    }, [schedules])
 
 
     return (

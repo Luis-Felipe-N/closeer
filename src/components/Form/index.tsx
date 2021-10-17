@@ -135,9 +135,9 @@ export function Form({schedules}: SchedulesProps) {
             <form className={styles.form} onSubmit={handleAddSchedule}>
                 <div  className={styles.timeStart}>
                     { dateBtn ? (
-                        <button onClick={() => setOpenCalendar(!openCalendar)} type="button">{format(date, "d'/'MMMM", {locale: ptBR})}</button>
+                        <button onClick={() => setOpenCalendar(true)} type="button">{format(date, "d'/'MMMM", {locale: ptBR})}</button>
                     ) : (
-                        <button onClick={() => setOpenCalendar(!openCalendar)} type="button">Selecione uma data...</button>
+                        <button onClick={() => setOpenCalendar(true)} type="button">Selecione uma data...</button>
                     )}
                     <div>
                         <Input 
