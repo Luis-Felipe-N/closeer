@@ -1,3 +1,62 @@
+<p align="center">
+  <img alt="Closeer" src="src/assets/image/logo-white.svg" width="160px">
+</p>
+
+<p align="center">
+  <img  src="https://img.shields.io/static/v1?label=license&message=MIT&color=5965E0&labelColor=121214" alt="License">
+  
+  <img src="https://img.shields.io/github/forks/Luis-Felipe-N/closeer?label=forks&message=MIT&color=5965E0&labelColor=121214" alt="Forks">     
+
+  <img src="https://img.shields.io/github/stars/Luis-Felipe-N/closeer?label=stars&message=MIT&color=5965E0&labelColor=121214" alt="Stars">
+</p>
+
+<h1 align="center">
+    <img alt="Closeer" title="Closeer" src="src/assets/image/cover.png" />
+</h1>
+
+<br>
+
+## 🧪 Technologies
+
+This project was developed using the following technologies:
+
+- [React](https://reactjs.org)
+- [Firebase](https://firebase.google.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+
+## 🚀 Getting started
+
+Clone the project and access the folder.
+
+```bash
+$ git clone https://github.com/Luis-Felipe-N/closeer.git
+$ cd closeer
+```
+
+Follow the steps below:
+```bash
+# Install the dependencies
+$ yarn
+
+# Start the project
+$ yarn start
+```
+The app will be available for access on your browser at http://localhost:3000
+
+## 🔖 Layout
+
+You can view the project layout through the links below:
+
+- [Layout Web](https://bit.ly/3AEcym7) 
+
+Remembering that you need to have a [Figma](http://figma.com/) account to access it.
+
+## 📝 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE.md) file for details.
+
+### Regras
+
 - [x] Seguir interface proposta: https://bit.ly/3AEcym7
 
 - [x] Os dados de Yuji devem ser consumidos de um arquivo .JSON, simulando o consumo de dados de uma API.
@@ -13,8 +72,12 @@ mesmo tempo.
 
 - [x] Ao adicionar um novo job na agenda, o formulário deve ser resetado, para estar pronto para uma nova inserção.
 
-- [] A cada novo job inserido, a listagem de jobs na agenda deve ser ordenada de forma cronológica.
+- [x] A cada novo job inserido, a listagem de jobs na agenda deve ser ordenada de forma cronológica.
 
 - [x] Ao provocar um :hover nos círculos indicadores de categoria da agenda e de cada job, o Tooltip (um balão flutuante informativo) corresponde deve ser exibido.
 
 - [x] O projeto deve ser construído utilizando React
+
+---
+
+<p align="center">Made with 💜 by Luis Felipe Nunes de Carvalho</p>
