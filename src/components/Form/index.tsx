@@ -22,7 +22,7 @@ interface SchedulesProps {
     schedules: SchedulesType[] | undefined
 }
 
-export function Form(props: SchedulesProps) {
+export function Form({schedules}: SchedulesProps) {
     const [ inputHours, setInputHours ] = useState('')
     const [ inputMinutes, setInputMinutes ] = useState('')
     const [ inputHoursEnd, setInputHoursEnd ] = useState('')
@@ -45,23 +45,27 @@ export function Form(props: SchedulesProps) {
         dateEnd.setMinutes(Number(inputMinutesEnd))
         
         const dateInMilliseconds = Date.parse(String(date))
-        const dateEnIndMilliseconds = Date.parse(String(dateEnd))
+        const dateEndIndMilliseconds = Date.parse(String(dateEnd))
 
-        const timeEndIsCorrect = dateEnIndMilliseconds <=  dateInMilliseconds
+        const timeEndIsCorrect = dateEndIndMilliseconds <=  dateInMilliseconds
         if ( timeEndIsCorrect ) {
             setError('Termino da agenda está errada')
             return
         }
-        const thereWorkThatDay = props.schedules?.some( ({key, schedule}: SchedulesType) => (dateInMilliseconds >= schedule.date && dateEnIndMilliseconds <= schedule.date_end) || (dateInMilliseconds <= schedule.date && dateEnIndMilliseconds >= schedule.date_end) )
-        // valor >= date e valor <= dateEnd = job na mesma hora.
-        // valor <= date e valor >= dateEnd = job na mesma hora.
-        if (thereWorkThatDay) return setError('Há um conflito de datas-horas')
-        
-        const sameWorkDay = props.schedules?.some( ({key, schedule}: SchedulesType) => dateInMilliseconds === schedule.date || dateInMilliseconds === schedule.date_end )
+       
+        const sameDate = schedules?.some( ({key, schedule}: SchedulesType) => date.getDate() === new Date(schedule.date).getDate())
 
-        if( sameWorkDay ) return setError('Há um conflito de datas-horas')
+        if ( sameDate ) {
+            const thereWorkThatDay = schedules?.some( ({key, schedule}: SchedulesType) => (dateInMilliseconds >= schedule.date && dateEndIndMilliseconds <= schedule.date_end) || (dateInMilliseconds <= schedule.date && dateEndIndMilliseconds >= schedule.date_end) )
+            // valor >= date e valor <= dateEnd = job na mesma hora.
+            // valor <= date e valor >= dateEnd = job na mesma hora.
+            if (thereWorkThatDay) return setError('Há um conflito de datas-horas 0')
 
-        return { dateInMilliseconds, dateEnIndMilliseconds }
+            const sameHoursBetweenJobs = schedules?.some( ({key, schedule}: SchedulesType) => (dateInMilliseconds <= schedule.date && dateEndIndMilliseconds >= schedule.date) || (dateInMilliseconds <= schedule.date_end && dateEndIndMilliseconds >= schedule.date_end) )
+            if(sameHoursBetweenJobs) return setError('Há um conflito de datas-horas')
+        }
+
+        return { dateInMilliseconds, dateEndIndMilliseconds }
     }
 
     const cleanInputs = () => {
@@ -83,10 +87,10 @@ export function Form(props: SchedulesProps) {
 
        const dates = getDatesFormated()
 
-        if (!dates?.dateEnIndMilliseconds) return
+        if (!dates?.dateEndIndMilliseconds) return
 
         try {
-            addSchedule( dates.dateInMilliseconds, dates.dateEnIndMilliseconds )
+            addSchedule( dates.dateInMilliseconds, dates.dateEndIndMilliseconds )
             cleanInputs()
         } catch {
             setError('Não foi possivel fazer o registro')
