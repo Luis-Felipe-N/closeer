@@ -25,8 +25,21 @@ export function ScheduleList({schedules}: SchedulesProps) {
                 return a.schedule.date - b.schedule.date
             })
             setOrderedSchedule(schedules)
+            filterByYear()
         }
     }, [schedules])
+
+    const filterByYear = () => {
+        const scheduleFilter = orderedSchedule?.filter( ({ key, schedule }: SchedulesType ) => {
+            const year = new Date(schedule.date).getFullYear()
+            const currentYear = new Date().getFullYear()
+            if( year === currentYear) {
+                return true
+            } else return false
+        } )
+
+        setOrderedSchedule(scheduleFilter)
+    }
 
     return (
         <section className={styles.schedulesContainer}>
@@ -46,3 +59,4 @@ export function ScheduleList({schedules}: SchedulesProps) {
         </section>
     )
 }
+// 
