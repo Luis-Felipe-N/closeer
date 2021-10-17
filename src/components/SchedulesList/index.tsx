@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Schedules } from '../Schedule'
 import { Status }  from '../Status'
 import styles from './styles.module.scss'
@@ -19,7 +19,7 @@ interface SchedulesProps {
 export function ScheduleList({schedules}: SchedulesProps) {
     const [ orderedSchedule , setOrderedSchedule ] = useState<SchedulesType[]>()
 
-    const filterByYear = () => {
+    const filterByYear = useCallback(() => {
         const scheduleFilter = orderedSchedule?.filter( ({ key, schedule }: SchedulesType ) => {
             const year = new Date(schedule.date).getFullYear()
             const currentYear = new Date().getFullYear()
@@ -29,8 +29,8 @@ export function ScheduleList({schedules}: SchedulesProps) {
         } )
 
         setOrderedSchedule(scheduleFilter)
-    }
-    
+    }, [orderedSchedule])
+
     useEffect(() => {
         if (schedules) {
             schedules.sort((a, b) => {
