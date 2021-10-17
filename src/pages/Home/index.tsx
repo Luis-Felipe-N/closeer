@@ -62,7 +62,7 @@ export function Home() {
                 </div>
                 <section className={styles.section}>
                     <div>
-                        <h1>Bem-vindo(a), {dataUser.data.fisrt_name}</h1>
+                        <h1>Bem-vindo(a), {user?.fisrt_name}</h1>
                         <h3>Adicione seus jobs a agenda e gerencie sua rotina</h3>
 
                         <Form schedules={schedules} />
