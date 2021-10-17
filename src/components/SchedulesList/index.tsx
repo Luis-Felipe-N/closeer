@@ -19,16 +19,6 @@ interface SchedulesProps {
 export function ScheduleList({schedules}: SchedulesProps) {
     const [ orderedSchedule , setOrderedSchedule ] = useState<SchedulesType[]>()
 
-    useEffect(() => {
-        if (schedules) {
-            schedules.sort((a, b) => {
-                return a.schedule.date - b.schedule.date
-            })
-            setOrderedSchedule(schedules)
-            filterByYear()
-        }
-    }, [schedules, filterByYear])
-
     const filterByYear = () => {
         const scheduleFilter = orderedSchedule?.filter( ({ key, schedule }: SchedulesType ) => {
             const year = new Date(schedule.date).getFullYear()
@@ -40,6 +30,17 @@ export function ScheduleList({schedules}: SchedulesProps) {
 
         setOrderedSchedule(scheduleFilter)
     }
+    
+    useEffect(() => {
+        if (schedules) {
+            schedules.sort((a, b) => {
+                return a.schedule.date - b.schedule.date
+            })
+            setOrderedSchedule(schedules)
+            filterByYear()
+        }
+    }, [schedules, filterByYear])
+
 
     return (
         <section className={styles.schedulesContainer}>
