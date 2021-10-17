@@ -11,6 +11,7 @@ import { ReactComponent as ClockIcon } from '../../assets/image/clock.svg'
 
 import styles from './styles.module.scss'
 
+import dataUser from '../../db.json'
 
 interface User {
     fisrt_name: string
@@ -27,13 +28,17 @@ interface User {
 export function Header() {
     const [ user, setUser ] = useState<User>()
 
+    // useEffect(() => {
+    //     const getDataUser = async () => {
+    //         const response = await fetch('http://localhost:3000/data')
+    //         const responseJson = await response.json()
+    //         setUser(responseJson)
+    //     }
+    //     getDataUser()
+    // }, [])
+
     useEffect(() => {
-        const getDataUser = async () => {
-            const response = await fetch('http://localhost:3000/data')
-            const responseJson = await response.json()
-            setUser(responseJson)
-        }
-        getDataUser()
+        setUser(dataUser.data)
     }, [])
 
     return (

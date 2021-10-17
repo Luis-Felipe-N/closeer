@@ -10,6 +10,8 @@ import { getSchedules } from '../../utils/firebase';
 import { Form } from '../../components/Form'
 import { ScheduleList } from '../../components/SchedulesList'
 
+import dataUser from '../../db.json'
+
 interface SchedulesType {
     key: string,
     schedule: {
@@ -18,9 +20,34 @@ interface SchedulesType {
         created_at: number
     }
 }
+interface User {
+    fisrt_name: string
+    last_name: string
+    picture: string
+    height: number
+    size: string
+    shoe: number
+    role: string
+    created_at: string
+}
 
 export function Home() {
     const [ schedules, setSchedules ] = useState<SchedulesType[]>()
+    const [ user, setUser ] = useState<User>()
+
+    // useEffect(() => {
+    //     const getDataUser = async () => {
+    //         const response = await fetch('http://localhost:3000/data')
+    //         const responseJson = await response.json()
+    //         setUser(responseJson)
+    //     }
+    //     getDataUser()
+    // }, [])
+
+    useEffect(() => {
+        setUser(dataUser.data)
+    }, [])
+
 
     useEffect(() => {
         getSchedules(setSchedules)
@@ -35,7 +62,7 @@ export function Home() {
                 </div>
                 <section className={styles.section}>
                     <div>
-                        <h1>Bem-vindo(a), Yuji</h1>
+                        <h1>Bem-vindo(a), {dataUser.data.fisrt_name}</h1>
                         <h3>Adicione seus jobs a agenda e gerencie sua rotina</h3>
 
                         <Form schedules={schedules} />
