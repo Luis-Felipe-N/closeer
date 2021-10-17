@@ -78,6 +78,12 @@ mesmo tempo.
 
 - [x] O projeto deve ser construído utilizando React
 
+### Diferencial
+
+- [x] Atualizar a data e hora atual no Header, semelhante a um relógio.
+- [x] Atualizar a listagem na agenda periodicamente, para modificar os status de cada job agendado (já iniciou, próximo de iniciar, para o futuro) de acordo com a data - hora corrente.
+
+
 ---
 
 <p align="center">Made with 💜 by Luis Felipe Nunes de Carvalho</p>
