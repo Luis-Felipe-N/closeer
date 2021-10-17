@@ -27,7 +27,7 @@ export function ScheduleList({schedules}: SchedulesProps) {
             setOrderedSchedule(schedules)
             filterByYear()
         }
-    }, [schedules])
+    }, [schedules, filterByYear])
 
     const filterByYear = () => {
         const scheduleFilter = orderedSchedule?.filter( ({ key, schedule }: SchedulesType ) => {
