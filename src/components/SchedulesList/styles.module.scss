@@ -1,0 +1,23 @@
+.schedulesContainer {
+    // display: block;
+    max-width: 750px;
+    width: 100%;
+    background-color: var(--color-primary);
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+
+    &__header ul {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }    
+
+    &__main {
+        max-width: 1000px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: .5rem;
+    }
+}

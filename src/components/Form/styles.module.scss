@@ -1,0 +1,93 @@
+.formContainer {
+    .form  {
+        .timeStart {
+            display: flex;
+            gap: 1rem;
+        }
+        .timeEnd {
+            margin-top: 1rem;
+            span {
+                margin-bottom: .5rem;
+            }
+        }
+        
+        .input {
+            width: 150px;
+            padding: .5rem;
+            border-radius: 5px 0 0 5px ;
+            background-color: #F2F2F2;
+            border: 0;
+            color: #6b6b6b;
+            font-weight: 500;
+            
+            & + input {
+                border-radius: 0 5px 5px 0;
+                margin-left: .2rem;
+            }
+
+            &:focus {
+                outline-color: #808080;
+            }
+        }
+
+        button {
+            color: #6b6b6b;
+            border-radius: 5px;
+            border: 0;
+            padding: 0 1rem ;
+        }
+
+        .btnAgendar {
+            margin-top: 1rem;
+            padding: 1rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+
+            span {
+                display: inline-block;
+                height: 60%;
+                width: 1px;
+                background-color: var(--color-white);
+                margin: .5rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 950px) {
+    .formContainer .form .timeStart{
+        flex-direction: column;
+
+    }
+    .formContainer .form .timeStart, .formContainer .form .timeEnd{
+
+        button {
+            padding-top: 1rem ;
+            padding-bottom: 1rem ;
+        }
+
+        > div {
+            display: flex;
+        }
+        .input {
+            padding: 1rem;
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 730px ) {
+    .formContainer .form {
+        .btnAgendar {
+            justify-content: center;
+            font-weight: 600;
+
+            .iconCalendar, span {
+                display: none;
+            }
+        }
+    }
+}

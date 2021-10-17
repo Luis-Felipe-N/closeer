@@ -1,0 +1,9 @@
+.scheduleContainer {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    white-space: nowrap;
+    list-style: none;
+
+    color: var(--color-white);
+}
