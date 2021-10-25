@@ -1,6 +1,9 @@
 @import '../../styles/utils/mixins.scss';
 
 .headerContainer {
+    position: sticky;
+    top: 0;
+    bottom: 0;
     height: 100vh;
     border-radius: 0 20px 0 0;
     background-color: var(--color-primary);
